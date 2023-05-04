@@ -1,7 +1,7 @@
 # IntelliJ Tauri Plugin
 
-[![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/v/00000-tauri)](https://plugins.jetbrains.com/plugin/00000-tauri)
-[![JetBrains plugins](https://img.shields.io/jetbrains/plugin/d/00000-tauri)](https://plugins.jetbrains.com/plugin/00000-tauri/versions)
+[![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/v/21659-tauri)](https://plugins.jetbrains.com/plugin/21659-tauri)
+[![JetBrains plugins](https://img.shields.io/jetbrains/plugin/d/21659-tauri)](https://plugins.jetbrains.com/plugin/21659-tauri/versions)
 [![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/KartanHQ/intellij-tauri/build.yml?branch=master)](https://github.com/KartanHQ/intellij-tauri/actions/workflows/build.yml)
 [![GitHub](https://img.shields.io/github/license/KartanHQ/intellij-tauri)](https://github.com/KartanHQ/intellij-tauri/blob/master/LICENSE)
 [![Twitter Follow](https://img.shields.io/badge/follow-%40nekofar-1DA1F2?logo=twitter&style=flat)](https://twitter.com/nekofar)

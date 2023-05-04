@@ -26,6 +26,10 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-
+        <!-- works in WebStorm and other SmallIDEs -->
+        <directoryProjectGenerator implementation="com.nekofar.milad.intellij.tauri.cli.TauriCliProjectGenerator" />
+        <projectTemplatesFactory implementation="com.nekofar.milad.intellij.tauri.cli.TauriProjectTemplateFactory"/>
+        <!-- works in new IDEA wizard -->
+        <moduleBuilder builderClass="com.nekofar.milad.intellij.tauri.cli.TauriCliProjectModuleBuilder" />
     </extensions>
 </idea-plugin>

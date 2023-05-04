@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-## [changelog] - 2023-05-04
+## [1.0.0-alpha.1] - 2023-05-04
 
 ### Features
 

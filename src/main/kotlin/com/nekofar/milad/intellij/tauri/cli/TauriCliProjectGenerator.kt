@@ -29,10 +29,10 @@ class TauriCliProjectGenerator : NpmPackageProjectGenerator() {
 
     override fun getNpxCommands() = listOf(NpxPackageDescriptor.NpxCommand(packageName, npxCommand))
 
-    override fun generateInTemp(): Boolean = false
+    override fun generateInTemp(): Boolean = true
 
-    override fun generatorArgs(project: Project?, dir: VirtualFile?, settings: Settings?): Array<String> =
-        arrayOf(".")
+    override fun generatorArgs(project: Project?, dir: VirtualFile?, settings: Settings?) =
+        project?.let { arrayOf(it.name) }
 
     override fun getIcon(): Icon = TauriIcons.ProjectGenerator
 }

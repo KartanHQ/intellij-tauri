@@ -15,6 +15,9 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>JavaScript</depends>
 
+    <!-- The base resource bundle for localizing messages in the plugin. -->
+    <resource-bundle>messages.TauriBundle</resource-bundle>
+
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">

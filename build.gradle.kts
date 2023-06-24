@@ -51,7 +51,7 @@ qodana {
     cachePath = provider { file(".qodana").canonicalPath }
     reportPath = provider { file("build/reports/inspections").canonicalPath }
     saveReport = true
-    showReport = environment("QODANA_SHOW_REPORT").map { it.toBoolean() }.getOrElse(false)
+    showReport = System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false
 }
 
 tasks {

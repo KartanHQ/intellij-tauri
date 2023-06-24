@@ -101,6 +101,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      # Remove files to save space
+      - name: Remove unnecessary files
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
       # Check out current repository
       - name: Fetch Sources

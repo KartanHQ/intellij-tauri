@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+## [1.0.7] - 2023-07-09
+
+### Bug Fixes
+
+- Solve some minor issues and update dependencies
+
+### Security
+
+- Refactor configuration script and update file permissions
+
 ## [1.0.6] - 2023-07-09
 
 ### Bug Fixes

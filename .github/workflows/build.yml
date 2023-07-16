@@ -117,14 +117,13 @@ jobs:
   # Run tests and upload a code coverage report
   test:
     name: Test
-    if: false
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
 
       # Check out current repository
       - name: Fetch Sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.5.3
 
       # Setup Java environment for the next steps
       - name: Setup Java
@@ -135,7 +134,7 @@ jobs:
 
       # Setup Gradle
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v2.4.2
 
       # Run tests
       - name: Run Tests
@@ -144,14 +143,14 @@ jobs:
       # Collect Tests Result of failed tests
       - name: Collect Tests Result
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: tests-result
           path: ${{ github.workspace }}/build/reports/tests
 
       # Upload Kover report to CodeCov
       - name: Upload Code Coverage Report
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v3.1.4
         with:
           files: ${{ github.workspace }}/build/reports/kover/xml/report.xml
 

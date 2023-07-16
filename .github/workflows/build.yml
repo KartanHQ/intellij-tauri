@@ -51,6 +51,13 @@ jobs:
       - name: Gradle Wrapper Validation
         uses: gradle/wrapper-validation-action@v1.0.6
 
+      # Setup Java environment for the next steps
+      - name: Setup Java
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: zulu
+          java-version: 17
+
       # Setup Gradle
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.4.2
@@ -110,18 +117,24 @@ jobs:
   # Run tests and upload a code coverage report
   test:
     name: Test
-    if: false
-    needs: build
+    needs: [ build ]
     runs-on: ubuntu-latest
     steps:
 
       # Check out current repository
       - name: Fetch Sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.5.3
+
+      # Setup Java environment for the next steps
+      - name: Setup Java
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: zulu
+          java-version: 17
 
       # Setup Gradle
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v2.4.2
 
       # Run tests
       - name: Run Tests
@@ -130,21 +143,49 @@ jobs:
       # Collect Tests Result of failed tests
       - name: Collect Tests Result
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: tests-result
           path: ${{ github.workspace }}/build/reports/tests
 
       # Upload Kover report to CodeCov
       - name: Upload Code Coverage Report
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v3.1.4
         with:
           files: ${{ github.workspace }}/build/reports/kover/xml/report.xml
+
+  # Run Qodana inspections and provide report
+  inspectCode:
+    name: Inspect code
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      checks: write
+      pull-requests: write
+    steps:
+
+      # Check out current repository
+      - name: Fetch Sources
+        uses: actions/checkout@v3.5.3
+
+      # Setup Java environment for the next steps
+      - name: Setup Java
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: zulu
+          java-version: 17
+
+      # Run Qodana inspections
+      - name: Qodana - Code Inspection
+        uses: JetBrains/qodana-action@v2023.1.5
+        with:
+          cache-default-branch-only: true
 
   # Run plugin structure verification along with IntelliJ Plugin Verifier
   verify:
     name: Verify plugin
-    needs: build
+    needs: [ build, test, inspectCode ]
     runs-on: ubuntu-latest
     steps:
       # Remove files to save space
@@ -156,6 +197,13 @@ jobs:
       # Check out current repository
       - name: Fetch Sources
         uses: actions/checkout@v3.5.3
+
+      # Setup Java environment for the next steps
+      - name: Setup Java
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: zulu
+          java-version: 17
 
       # Setup Gradle
       - name: Setup Gradle
@@ -180,34 +228,12 @@ jobs:
           name: pluginVerifier-result
           path: ${{ github.workspace }}/build/reports/pluginVerifier
 
-  # Run Qodana inspections and provide report
-  inspectCode:
-    name: Inspect code
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      checks: write
-      pull-requests: write
-    steps:
-
-      # Check out current repository
-      - name: Fetch Sources
-        uses: actions/checkout@v3.5.3
-
-      # Run Qodana inspections
-      - name: Qodana - Code Inspection
-        if: ${{ github.actor != 'dependabot[bot]' }}
-        uses: JetBrains/qodana-action@v2023.1.5
-        with:
-          cache-default-branch-only: true
-
   # Prepare a draft release for GitHub Releases page for the manual verification
   # If accepted and published, release workflow would be triggered
   releaseDraft:
     name: Release draft
     if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/support/')
-    needs: [ build, verify, inspectCode ]
+    needs: [ build, verify ]
     runs-on: ubuntu-latest
     permissions:
       contents: write

@@ -9,12 +9,14 @@
 
 
 <!-- Plugin description -->
-Quickly start building a new [Tauri](https://tauri.app) app within seconds, with everything set up for you.
+[Tauri](https://tauri.app), an app construction toolkit, enables the development of software for all primary desktop operating systems using web technologies.
 
-Whether you're a seasoned pro or just starting out, makes it easy to speed up the setup and initialization phase of your project creation process.
+This plugin simplifies the process of scaffolding a new project by offering opinionated templates for not only vanilla HTML/CSS/JavaScript but also for several frontend frameworks including `React`, `Svelte`, and `Yew`.
+
+Regardless of your experience level, from beginners to experts, this plugin makes the setup and initialization phase of your project creation process more efficient.
 <!-- Plugin description end -->
 
 ## Installation
 
-To install plugin open `Preferences > Plugins > Marketplace`, and search for Tauri.
+For plugin installation, navigate to `Preferences`, then `Plugins`, and finally `Marketplace`. In the search bar, enter `Tauri`.
 

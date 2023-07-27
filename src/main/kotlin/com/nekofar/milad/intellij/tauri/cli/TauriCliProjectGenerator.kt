@@ -21,7 +21,7 @@ class TauriCliProjectGenerator : NpmPackageProjectGenerator() {
 
     override fun customizeModule(virtualFile: VirtualFile, contentEntry: ContentEntry?) {}
 
-    override fun packageName(): String = packageName
+    override fun packageName() = packageName
 
     override fun presentablePackageName() = message("tauri.project.generator.presentable.package.name")
 

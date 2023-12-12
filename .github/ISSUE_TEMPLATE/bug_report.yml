@@ -7,32 +7,56 @@ assignees:
   - nekofar
 
 body:
+
   - type: textarea
+    id: issue
     attributes:
-      label: Describe the bug
+      label: What happened?
       description: A clear and concise description of what the bug is.
-      placeholder: Describe the bug here.
+    validations:
+      required: true
 
   - type: textarea
+    id: logs
     attributes:
-      label: Steps to reproduce the behavior
-      description: List the steps to reproduce the behavior, including any necessary environment details.
-      placeholder: List the steps to reproduce here.
+      label: Relevant log output or stack trace
+      description: |
+        Please copy and paste any relevant log output.
+        Add the full stack trace if available.
+        If possible, run the failing task with `--stacktrace` flag.
+        
+        *This will be automatically formatted into code, so there is no need for backticks.*
+      render: shell
 
   - type: textarea
+    id: steps
     attributes:
-      label: Expected behavior
-      description: A clear and concise description of what you expected to happen.
-      placeholder: Describe the expected behavior here.
+      label: Steps to reproduce
+      description: Steps to reproduce the behavior – provide your build configuration.
+    validations:
+      required: true
 
-  - type: textarea
+  - type: input
+    id: version
     attributes:
-      label: Screenshots
-      description: If applicable, add screenshots to help explain the problem.
-      placeholder: Add any relevant screenshots here.
+      label: Plugin version
+      placeholder: 1.0.0
+    validations:
+      required: true
 
-  - type: textarea
+  - type: input
+    id: gradle
     attributes:
-      label: Additional context
-      description: Add any other context about the problem here.
-      placeholder: Add any additional context here.
+      label: Gradle version
+      placeholder: 8.2.1
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - macOS
+        - Linux
+        - Windows

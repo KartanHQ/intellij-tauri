@@ -4,7 +4,7 @@
 [![JetBrains plugins](https://img.shields.io/jetbrains/plugin/d/21659-tauri)](https://plugins.jetbrains.com/plugin/21659-tauri/versions)
 [![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/KartanHQ/intellij-tauri/build.yml?branch=master)](https://github.com/KartanHQ/intellij-tauri/actions/workflows/build.yml)
 [![GitHub](https://img.shields.io/github/license/KartanHQ/intellij-tauri)](https://github.com/KartanHQ/intellij-tauri/blob/master/LICENSE)
-[![Twitter Follow](https://img.shields.io/badge/follow-%40nekofar-1DA1F2?logo=twitter&style=flat)](https://twitter.com/nekofar)
+[![X (formerly Twitter) Follow](https://img.shields.io/badge/follow-%40nekofar-ffffff?logo=x&style=flat)](https://x.com/nekofar)
 [![Donate](https://img.shields.io/badge/donate-nekofar.crypto-a2b9bc?logo=ko-fi&logoColor=white)](https://ud.me/nekofar.crypto)
 
 

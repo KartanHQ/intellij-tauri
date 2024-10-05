@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-## [1.0.23]] - 2024-02-29
+## [1.0.23] - 2024-02-29
 
 ### Bug Fixes
 

@@ -9,10 +9,12 @@
 # The workflow is triggered on push and pull_request events.
 #
 # GitHub Actions reference: https://help.github.com/en/actions
+#
+## JBIJPPTPL
 
 name: Build
 on:
-  # Trigger the workflow on pushes to only the 'master', 'support' and 'release' branches
+  # Trigger the workflow on pushes to only the 'main' branch (this avoids duplicate checks being run e.g., for dependabot pull requests)
   push:
     branches:
       - master
@@ -23,6 +25,10 @@ on:
     types: [ opened, reopened ]
   # Trigger the workflow on manual dispatch
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   guard:
@@ -49,13 +55,13 @@ jobs:
       pluginVerifierHomeDir: ${{ steps.properties.outputs.pluginVerifierHomeDir }}
     steps:
 
-      # Check out current repository
+      # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4.2.0
 
       # Validate wrapper
       - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@v3.5.0
+        uses: gradle/actions/wrapper-validation@v4.1.0
 
       # Set up Java environment for the next steps
       - name: Setup Java
@@ -66,7 +72,7 @@ jobs:
 
       # Setup Gradle
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3.5.0
+        uses: gradle/actions/setup-gradle@v4.1.0
         with:
           gradle-home-cache-cleanup: true
 
@@ -82,8 +88,6 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "name=$NAME" >> $GITHUB_OUTPUT
           echo "pluginVerifierHomeDir=~/.pluginVerifier" >> $GITHUB_OUTPUT
-          
-          ./gradlew listProductsReleases # prepare list of IDEs for Plugin Verifier
 
       # Extract changelog information
       - name: Prepare Changelog
@@ -129,7 +133,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      # Check out current repository
+      # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4.2.0
 
@@ -142,7 +146,7 @@ jobs:
 
       # Setup Gradle
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3.5.0
+        uses: gradle/actions/setup-gradle@v4.1.0
         with:
           gradle-home-cache-cleanup: true
 
@@ -182,9 +186,12 @@ jobs:
           tool-cache: false
           large-packages: false
 
-      # Check out current repository
+      # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4.2.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
+          fetch-depth: 0  # a full history is required for pull request analysis
 
       # Set up Java environment for the next steps
       - name: Setup Java
@@ -213,7 +220,14 @@ jobs:
           tool-cache: false
           large-packages: false
 
-      # Check out current repository
+      # Free GitHub Actions Environment Disk Space
+      - name: Maximize Build Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          large-packages: false
+
+      # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4.2.0
 
@@ -226,7 +240,7 @@ jobs:
 
       # Setup Gradle
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3.5.0
+        uses: gradle/actions/setup-gradle@v4.1.0
 
       # Cache Plugin Verifier IDEs
       - name: Setup Plugin Verifier IDEs Cache
@@ -237,7 +251,7 @@ jobs:
 
       # Run Verify Plugin task and IntelliJ Plugin Verifier tool
       - name: Run Plugin Verification tasks
-        run: ./gradlew runPluginVerifier -Dplugin.verifier.home.dir=${{ needs.build.outputs.pluginVerifierHomeDir }}
+        run: ./gradlew verifyPlugin -Dplugin.verifier.home.dir=${{ needs.build.outputs.pluginVerifierHomeDir }}
 
       # Collect Plugin Verifier Result
       - name: Collect Plugin Verifier Result
@@ -258,7 +272,7 @@ jobs:
       contents: write
     steps:
 
-      # Check out current repository
+      # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4.2.0
 
@@ -287,7 +301,3 @@ jobs:
           notes: ${{ needs.build.outputs.changelog }} # The release notes generated in the previous step
           draft: true # The release will be created as a draft
           prerelease: ${{ contains(needs.build.outputs.version, '-rc') || contains(needs.build.outputs.version, '-beta') || contains(needs.build.outputs.version, '-alpha') }} # Conditions to mark the release as a pre-release
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true

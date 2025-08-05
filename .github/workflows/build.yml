@@ -44,7 +44,7 @@ jobs:
           # Defines the threshold for the usage guard.
           threshold: 70
 
-  # Prepare environment and build the plugin
+  # Prepare the environment and build the plugin
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -76,8 +76,6 @@ jobs:
       # Setup Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.3.0
-        with:
-          gradle-home-cache-cleanup: true
 
       # Set environment variables
       - name: Export Properties
@@ -235,7 +233,7 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v4.2.2
 
-      # Set up Java environment for the next steps
+      # Set up the Java environment for the next steps
       - name: Setup Java
         uses: actions/setup-java@v4.7.0
         with:

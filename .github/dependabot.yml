@@ -2,16 +2,13 @@ version: 2
 updates:
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
-    # Files stored in repository root
+    # Files stored in the repository root
     directory: "/"
     # Check for updates every weekday
     schedule:
       interval: "daily"
       time: "00:00"
       timezone: "UTC"
-    # Add assignees
-    assignees:
-      - "nekofar"
     # Include a list of updated dependencies
     commit-message:
       prefix: "ci"
@@ -29,16 +26,13 @@ updates:
 
   # Maintain dependencies for Gradle
   - package-ecosystem: "gradle"
-    # Files stored in repository root
+    # Files stored in the repository root
     directory: "/"
     # Check for updates every weekday
     schedule:
       interval: "daily"
       time: "00:00"
       timezone: "UTC"
-    # Add assignees
-    assignees:
-      - "nekofar"
     # Include a list of updated dependencies
     commit-message:
       prefix: "build"

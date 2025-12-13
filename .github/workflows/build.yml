@@ -64,7 +64,7 @@ jobs:
 
       # Check out the current repository
       - name: Fetch Sources
-        uses: actions/checkout@v6.0.0
+        uses: actions/checkout@v6.0.1
 
       # Set up the Java environment for the next steps
       - name: Setup Java
@@ -143,7 +143,7 @@ jobs:
 
       # Check out the current repository
       - name: Fetch Sources
-        uses: actions/checkout@v6.0.0
+        uses: actions/checkout@v6.0.1
 
       # Set up the Java environment for the next steps
       - name: Setup Java
@@ -197,7 +197,7 @@ jobs:
 
       # Check out the current repository
       - name: Fetch Sources
-        uses: actions/checkout@v6.0.0
+        uses: actions/checkout@v6.0.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
           fetch-depth: 0  # a full history is required for pull request analysis
@@ -211,7 +211,7 @@ jobs:
 
       # Run Qodana inspections
       - name: Qodana - Code Inspection
-        uses: JetBrains/qodana-action@v2025.1.1
+        uses: JetBrains/qodana-action@v2025.2.3
         with:
           cache-default-branch-only: true
 
@@ -231,7 +231,7 @@ jobs:
 
       # Check out the current repository
       - name: Fetch Sources
-        uses: actions/checkout@v6.0.0
+        uses: actions/checkout@v6.0.1
 
       # Set up the Java environment for the next steps
       - name: Setup Java
@@ -271,7 +271,7 @@ jobs:
 
       # Check out the current repository
       - name: Fetch Sources
-        uses: actions/checkout@v6.0.0
+        uses: actions/checkout@v6.0.1
 
       # Remove old release drafts by using the curl request for the available releases with a draft flag
       - name: Remove Old Release Drafts
@@ -284,7 +284,7 @@ jobs:
 
       # Create a new release draft which is not publicly visible and requires manual acceptance
       - name: Create Release Draft
-        uses: nekofar/create-github-release@v1.0.14
+        uses: nekofar/create-github-release@v1.0.15
         with:
           tag: v${{ needs.build.outputs.version }} # The name of the tag to be released
           title: v${{ needs.build.outputs.version }} # The title for the release

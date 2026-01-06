@@ -2,7 +2,7 @@ version: 2
 updates:
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
-    # Files stored in the repository root
+    # Files stored in repository root
     directory: "/"
     # Check for updates every weekday
     schedule:
@@ -26,7 +26,7 @@ updates:
 
   # Maintain dependencies for Gradle
   - package-ecosystem: "gradle"
-    # Files stored in the repository root
+    # Files stored in repository root
     directory: "/"
     # Check for updates every weekday
     schedule:

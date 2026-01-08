@@ -7,62 +7,32 @@ assignees:
   - nekofar
 
 body:
-
   - type: textarea
-    id: issue
     attributes:
-      label: What happened?
+      label: Describe the bug
       description: A clear and concise description of what the bug is.
-    validations:
-      required: true
+      placeholder: Describe the bug here.
 
   - type: textarea
-    id: logs
     attributes:
-      label: Relevant log output or stack trace
-      description: |
-        Please copy and paste any relevant log output.
-        Add the full stack trace if available.
-        If possible, run the failing task with `--stacktrace` flag.
-        
-        *This will be automatically formatted into code, so there is no need for backticks.*
-      render: shell
+      label: Steps to reproduce the behavior
+      description: List the steps to reproduce the behavior, including any necessary environment details.
+      placeholder: List the steps to reproduce here.
 
   - type: textarea
-    id: steps
     attributes:
-      label: Steps to reproduce
-      description: Steps to reproduce the behavior – provide your build configuration.
-    validations:
-      required: true
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: Describe the expected behavior here.
 
-  - type: input
-    id: version
+  - type: textarea
     attributes:
-      label: Plugin version
-      placeholder: 1.0.0
-    validations:
-      required: true
+      label: Screenshots
+      description: If applicable, add screenshots to help explain the problem.
+      placeholder: Add any relevant screenshots here.
 
-  - type: input
-    id: gradle
+  - type: textarea
     attributes:
-      label: Gradle version
-      placeholder: 8.2.1
-    validations:
-      required: true
-
-  - type: dropdown
-    id: os
-    attributes:
-      label: Operating System
-      options:
-        - macOS
-        - Linux
-        - Windows
-
-  - type: input
-    id: url
-    attributes:
-      label: Link to build, i.e. failing GitHub Action job
-      placeholder: https://github.com/username/project/actions/runs/1234567890
+      label: Additional context
+      description: Add any other context about the problem here.
+      placeholder: Add any additional context here.
